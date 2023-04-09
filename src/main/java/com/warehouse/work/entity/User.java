@@ -21,7 +21,7 @@ import lombok.Data;
 @Data
 public class User extends AbstractEntity {
 
-	@Column(unique = true)
+	@Column
 	@NotNull
 	private String fio;
 
@@ -44,7 +44,7 @@ public class User extends AbstractEntity {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "creator")
 	private List<Order> myOrders = new ArrayList<Order>();
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "role_id")
 	private Role role;
 

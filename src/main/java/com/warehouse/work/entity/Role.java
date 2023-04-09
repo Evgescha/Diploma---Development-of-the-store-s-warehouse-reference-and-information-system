@@ -20,7 +20,7 @@ public class Role extends AbstractEntity {
 	@Column(unique = true)
 	private String name;
 
-	@OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
 	private Collection<User> users = new ArrayList<User>();
 
 	public Role(final String name) {

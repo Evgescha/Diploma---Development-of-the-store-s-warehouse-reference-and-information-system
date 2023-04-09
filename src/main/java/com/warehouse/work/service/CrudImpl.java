@@ -40,7 +40,6 @@ public class CrudImpl<Entity> implements CrudService<Entity> {
 			return false;
 		}
 		return true;
-
 	}
 
 	public CrudImpl(JpaRepository<Entity, Long> repository) {
