@@ -120,8 +120,6 @@ public class UserController {
             orderService.update(order);
         }
         order = orderService.read(order.getId());
-
-
         Product product = productService.read(id);
         int countResult = product.getCount() - count;
         if (countResult < 0) {
@@ -146,25 +144,14 @@ public class UserController {
         OrderItem localItem = order.getOrderElements().stream().filter(orderItem -> orderItem.getId() == id).findFirst().get();
         order.getOrderElements().remove(localItem);
         orderService.update(order);
-
-
         OrderItem orderItem = orderItemService.read(id);
-//        order.getOrderElements().remove(orderItem);
-
         Product product = productService.read(orderItem.getProduct().getId());
         product.setCount(product.getCount()+orderItem.getCount());
         productService.update(product);
-
-
         orderItem.setOrder(null);
         orderItem.setProduct(null);
         orderItemService.update(orderItem);
-
-
-
         orderItemService.delete(orderItem.getId());
-
-
         return "redirect:/user/basket";
     }
 
