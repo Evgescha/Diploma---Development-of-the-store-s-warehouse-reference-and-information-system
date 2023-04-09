@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Главная</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+
+<body>
+    
+	<div th:replace="~{commons :: nav}"></div>
+
+
+<section id="menu" class="menu">
+    <div class="container d-flex">
+        <div class="menu-info col-md-10">
+            <div class="row item"  th:each="entity : ${list}">
+                <div class="col-md-5 item-image">
+                    <img th:src="${entity.imageUrl}" alt="изображение" class="col-12">
+                </div> 
+                <div class="col-md-7 item-info">
+                    <div class="item-name" th:text="'Название: '+${entity.name}"></div>
+                    <div class="item-type" th:text="'Размеры: '+${entity.sizes}"></div>
+                    <div class="item-weight" th:text="'Вес: '+${entity.weight}"></div>
+                    <div class="item-description" th:text="'Описание '+${entity.description}"></div>
+                    <div class="item-prize" th:text="'Цена: '+${entity.price}"></div>
+                    <div class="item-prize" th:text="'Количество: '+${entity.count}"></div>
+                    <div class="item-buttons"  th:if="${#request.userPrincipal != null && #request.isUserInRole('ROLE_ADMIN')}">
+                    	<a th:href="@{/product/edit/{id}(id=${entity.id})}" class="btn btn-primary ">
+                            <i class="fas fa-edit">Редактировать</i>
+                        </a>
+                        <a th:href="@{/product/delete/{id}(id=${entity.id})}" class="btn btn-primary">
+                            <i class="fas fa-trash">Удалить</i>
+                        </a>
+                    </div>
+                    <div class="item-buttons"  th:if="${#request.userPrincipal != null && #request.isUserInRole('ROLE_USER') && entity.count>0}">
+                    	<form th:action="'/user/addProduct/'+${entity.id}" method="get">
+                            <input type="number" min="1" required value="1" name="count">
+                    		<button type="submit" class="btn btn-primary">
+                    			<i class="fas fa-edit">В корзину</i>
+                    		</button>
+                        </form>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+</section>
+
+</body>
+
+</html>

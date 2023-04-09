@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+	<div th:replace="~{commons :: head}"></div>
+    <title>Администрирование</title>
+</head>
+<body>
+	<div th:replace="~{commons :: nav}"></div>
+	
+   <section class="food-list" id="product"> 
+    <div class="container my-2">
+        <div class="card">
+            <div class="row">
+                <div class="card-body col">
+                    <h2 class="text-center"> Товар</h2>
+                    <div th:switch="${products}" class="container my-5">                        
+                        <div class="col-md-12">
+                            <h2 th:case="null"> Записей не найдено </h2>
+                            <div th:case="*" class="overScroll">
+                                <table class="table table-striped table-responsive-md">
+                                    <thead>
+                                        <tr>
+                                            <th> Название</th>
+                                            <th> Изображение</th>
+                                            <th> Описание</th>
+                                            <th> Цена</th>
+                                            <th> Размеры</th>
+                                            <th> Вес</th>
+                                            <th> Количество</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="entity : ${products}">
+                                            <td th:text="${entity.name}"></td>
+                                            <td>
+                                            	<img alt="Изображение" th:src="${entity.imageUrl}" height="150">
+                                            </td>
+                                            <td th:text="${entity.description}" class="d-flex" width="400px"></td>
+                                            <td th:text="${entity.price}"></td>
+                                            <td th:text="${entity.sizes}"></td>
+                                            <td th:text="${entity.weight}"></td>
+                                            <td th:text="${entity.count}"></td>
+                                            <td class="btnInTable widthLastCol" >
+                                                <a th:href="@{/product/edit/{id}(id=${entity.id})}" class="btn btn-primary ">
+                                                    <i class="fas fa-edit">Редактировать</i>
+                                                </a>
+                                            </td>
+                                            <td class="btnInTable widthLastCol">
+                                                <a th:href="@{/product/delete/{id}(id=${entity.id})}" class="btn btn-primary">
+                                                    <i class="fas fa-trash">Удалить</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="d-flex justify-content-end">
+                                <a href="/product/edit" class="btn btn-primary mx-2">
+                                <i class="fas fa-plus"> Добавить запись </i></a>
+                            </p>             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="typeTable-list" id="insuranceCompany"> 
+    <div class="container my-2">
+        <div class="card">
+            <div class="row">
+                <div class="card-body col">
+                    <h2 class="text-center"> Страховые компании</h2>
+                    <div th:switch="${insuranceCompanies}" class="container my-5">                        
+                        <div class="col-md-12">
+                            <h2 th:case="null"> Записей не найдено </h2>
+                            <div th:case="*" class="overScroll">
+                                <table class="table table-striped table-responsive-md">
+                                    <thead>
+                                        <tr>
+                                            <th> Название</th>
+                                            <th> Адрес</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="entity : ${insuranceCompanies}">
+                                            <td th:text="${entity.name}"></td>
+                                            <td th:text="${entity.adres}"></td>
+                                            <td class="btnInTable widthLastCol" >
+                                                <a th:href="@{/insuranceCompany/edit/{id}(id=${entity.id})}" class="btn btn-primary ">
+                                                    <i class="fas fa-edit">Редактировать</i>
+                                                </a>
+                                            </td>
+                                            <td class="btnInTable widthLastCol">
+                                                <a th:href="@{/insuranceCompany/delete/{id}(id=${entity.id})}" class="btn btn-primary">
+                                                    <i class="fas fa-trash">Удалить</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="d-flex justify-content-end">
+                                <a href="/insuranceCompany/edit" class="btn btn-primary mx-2">
+                                <i class="fas fa-plus"> Добавить запись </i></a>
+                            </p>             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="typeTable-list" id="transporter"> 
+    <div class="container my-2">
+        <div class="card">
+            <div class="row">
+                <div class="card-body col">
+                    <h2 class="text-center"> Перевозчики</h2>
+                    <div th:switch="${transporters}" class="container my-5">                        
+                        <div class="col-md-12">
+                            <h2 th:case="null"> Записей не найдено </h2>
+                            <div th:case="*" class="overScroll">
+                                <table class="table table-striped table-responsive-md">
+                                    <thead>
+                                        <tr>
+                                            <th> Название</th>
+                                            <th> Адрес</th>
+                                            <th> Страховая компания</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="entity : ${transporters}">
+                                            <td th:text="${entity.name}"></td>
+                                            <td th:text="${entity.adres}"></td>
+                                            <td th:text="${entity.insuranceCompany}"></td>
+                                            <td class="btnInTable widthLastCol" >
+                                                <a th:href="@{/transporter/edit/{id}(id=${entity.id})}" class="btn btn-primary ">
+                                                    <i class="fas fa-edit">Редактировать</i>
+                                                </a>
+                                            </td>
+                                            <td class="btnInTable widthLastCol">
+                                                <a th:href="@{/transporter/delete/{id}(id=${entity.id})}" class="btn btn-primary">
+                                                    <i class="fas fa-trash">Удалить</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="d-flex justify-content-end">
+                                <a href="/transporter/edit" class="btn btn-primary mx-2">
+                                <i class="fas fa-plus"> Добавить запись </i></a>
+                            </p>             
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="category-list" id="user"> 
+    <div class="container my-2">
+        <div class="card">
+            <div class="row">
+                <div class="card-body col">
+                    <h2 class="text-center"> Пользователи </h2>
+                    <div th:switch="${users}" class="container my-5">                        
+                        <div class="col-md-12">
+                            <h2 th:case="null"> Записей не найдено </h2>
+                            <div th:case="*" class="overScroll">
+                                <table class="table table-striped table-responsive-md">
+                                    <thead>
+                                        <tr>
+                                            <th>ФИО</th>
+                                            <th>Дата рождения</th>
+                                            <th>Почта</th>
+                                            <th>Телефон</th>
+                                            <th>Логин</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="entity : ${users}">
+                                            <td th:text="${entity.fio}"></td>
+                                            <td th:text="${entity.dateBorn}"></td>
+                                            <td th:text="${entity.phone}"></td>
+                                            <td th:text="${entity.email}"></td>
+                                            <td th:text="${entity.username}"></td>
+                                            <td class="btnInTable widthLastCol" >
+                                                <a th:href="@{/user/edit/{id}(id=${entity.id})}" class="btn btn-primary ">
+                                                    <i class="fas fa-edit">Редактировать</i>
+                                                </a>
+                                            </td>
+                                            <td class="btnInTable widthLastCol">
+                                                <a th:href="@{/user/delete/{id}(id=${entity.id})}" class="btn btn-primary">
+                                                    <i class="fas fa-trash">Удалить</i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <p class="d-flex justify-content-end">
+                                <a href="/user/edit" class="btn btn-primary mx-2">
+                                <i class="fas fa-plus"> Добавить запись </i></a>
+                            </p> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  
+   
+</body>
+ 
+</html>

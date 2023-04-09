@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Предзаказ</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+
+<body>
+
+<div th:replace="~{commons :: nav}"></div>
+
+<section class="orders" id="orders">
+    <div class="container">
+        <div class="order-items">
+            <h3 class="text-center">Страница предзаказа</h3>
+            <h4 class="text-center">На странице будут отображены товары заказов, еще не оформленных</h4>
+            <div class="row item p-3" th:each="entityM:${entity.myOrders}" th:if="${entityM.status.id==1}">
+                <form th:action="'/user/confirm/'+${entityM.id}" method="POST" onkeypress="return event.keyCode != 13;">
+                    <div class="h3 order-title"
+                         th:text="'Заказ №: '+${entityM.id}">
+                        Заказ на 25,25,2025
+                    </div>
+                    <div class="order-table" th:text="'Заказал: '+${entityM.creator.fio}">Пользователь</div>
+                    <div class="order-table" th:text="'Статус: '+${entityM.status}">status</div>
+                    <div class="order-peoples d-flex w-auto mr-5">
+                        <div class=" mr-5">Бронировать на дату</div>
+                        <input type="date" class="ml-1 order-dates" th:value="${entityM.dateDelivery}"
+                               name="dateDelivery" required>
+                    </div>
+                    <div class="order-peoples d-flex w-auto mr-5">
+                        <div class=" mr-5">Выберите доставщика</div>
+                        <select name="transporterId" required>
+                            <option name="transporterId" th:each="cat : ${transporters}" th:value="${cat.id}"
+                                    th:text="${cat}"></option>
+                        </select>
+                    </div>
+                    <input class="btn btn-primary mt-5" type="submit" required value="Подтвердить бронь"
+                           th:if="${#lists.size(entityM.orderElements)>0}">
+                    <a class="btn btn-primary mt-5" th:href="'/user/deleteOrder/'+${entityM.id}">Удалить эту бронь</a>
+                    <div class="order-food">
+                        <div class="order-food-item">
+                            <table class="table table-striped table-responsive-md">
+                                <thead>
+                                <tr>
+                                    <th>Товар</th>
+                                    <th>Цена</th>
+                                    <th>Количество</th>
+                                    <th>Сумма</th>
+                                    <th>Отмена</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="entity1 : ${entityM.orderElements}">
+                                    <td th:text="${entity1.product.name}"></td>
+                                    <td th:text="${entity1.product.price}"></td>
+                                    <td th:text="${entity1.count}"></td>
+                                    <td th:text="${entity1.product.price * entity1.count}"></td>
+                                    <td>
+                                        <a class="btn btn-primary" th:href="'/user/deleteProduct/'+${entity1.id}">
+                                            Отменить товар
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+</body>
+
+</html>

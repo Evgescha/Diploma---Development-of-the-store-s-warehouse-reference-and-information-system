@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Главная</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+
+<body>
+    
+	<div th:replace="~{commons :: nav}"></div>
+	<h3 class="text-center" th:if="${success}">Вы успешно зарегистрировались! Можете войти в систему.</h3>
+	<h3 class="text-center" th:if="${(param.error != null) and (param.error[0] == 'true')}">Ошибка входа в систему! Проверьте вводимые данные.</h3>
+    <section id="main-page">
+        <div class="container">
+            <div class="row">
+                <div class="main-info col-md-8">
+                    <h1 class="main-title font-italic">Склад товаров</h1>
+                    <h3 class="main-title-info font-italic">Выдаем нужные вещи</h3>
+                    <div class="main-info d-flex">
+                        <div class="main-description col-md-8">
+                            <p class="main-description-first">Мы рады приветствовать вас на сайте нашего склада!</p>
+                            <p class="main-description-second">Выбирайте товар из списка, добавляйте в корзину и ждите доставки.</p>
+                            <p class="main-description-third">Широкий выбор ассортимента разнообразит ваш день!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="login-form col-md-4 p-5" th:if="${#request.userPrincipal == null}">
+                    <h3 class="login-form-title">Форма авторизации</h3>
+                    <form action="/login1" method="POST">
+                        <div class="login-form-loginfield">
+                            <label for="name">Логин:</label>
+                            <input type="name" name="username">
+                        </div>
+                        <div class="login-form-passfield">
+                            <label for="username">Пароль:</label>
+                            <input type="password" name="password">
+                        </div>
+                        <div class="login-form-buttons justify-content-between d-flex m-3">
+                            <button type="submit" class=" btn btn-primary">ВХОД</button>
+                            <a href="/registration" class="login-form-registration btn btn-primary">РЕГИСТРАЦИЯ</a>
+                        </div>
+                    </form>
+                </div>                
+            </div>
+        </div>
+    </section>
+    
+
+</body>
+
+</html>

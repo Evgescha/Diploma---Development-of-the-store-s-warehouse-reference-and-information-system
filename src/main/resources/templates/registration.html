@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">	
+	<title>Регистрация</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<script src="js/jquery.js"></script>
+	<script src="js/bootstrap.js"></script>
+</head>
+<body>
+
+	<div th:replace="~{commons :: nav}"></div>
+<h3 th:if="${success}" class="text-center">Ошибка регистрации. Проверьте уникальность имени и попробуйте еще раз</h3>
+<section id="registration" class="registration">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 registration-inf m-auto">
+                    <h2 class="text-center">Регистрация</h2>
+                    <form action="/registration" method="POST">
+                        <div class="registration-item registration-firstname">
+                            <label>Введите ФИО</label>
+                            <input type="text" name="fio" required>
+                        </div>
+                        <div class="registration-item registration-lastname">
+                            <label>Введите дату рождения</label>
+                            <input type="date" name="dateBorn" required>
+                        </div>
+                        <div class="registration-item registration-email">
+                            <label>Введите адрес электронной почты</label>
+                            <input type="email" name="email" required>
+                        </div>
+                        <div class="registration-item registration-login">
+                            <label>Введите телефон</label>
+                            <input type="text" name="phone" required>
+                        </div>
+                        <div class="registration-item registration-login">
+                            <label>Введите логин</label>
+                            <input type="text" name="username" required>
+                        </div>
+                        <div class="registration-item registration-password">
+                            <label>Введите пароль</label>
+                            <input type="password" name="password" required>
+                        </div>
+                        <div class="login-form-buttons justify-content-between d-flex m-3">
+                            <button type="submit" class=" btn btn-primary">РЕГИСТРАЦИЯ</button>
+                            <button type="button" class="btn btn-primary" onclick="history.back()">Назад</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+</body>
+</html>
+	
+	
+	
+	
+	
+		
+	

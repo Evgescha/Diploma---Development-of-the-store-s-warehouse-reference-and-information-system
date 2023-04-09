@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta th:fragment="head">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/css/fontawesome.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    </meta>
+</head>
+
+<body>
+   
+    <header id="header" class="header" th:fragment="nav">
+        <div class="container">
+            <div class="row">
+                <div class="col p-0">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <a class="navbar-brand" href="/">ГЛАВНАЯ</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav justify-content-between">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/product">Каталог товаров</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/about">О нас</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/contact">Контакты</a>
+                                </li>                                                                
+                                <li class="nav-item" th:if="${#request.userPrincipal != null && #request.isUserInRole('ROLE_USER')}">
+                                    <a class="nav-link" href="/user/basket">Корзина</a>
+                                </li>
+                                <li class="nav-item" th:if="${#request.userPrincipal != null && #request.isUserInRole('ROLE_USER')}">
+                                    <a class="nav-link" href="/user/history">История заказов</a>
+                                </li>
+                                <li class="nav-item" th:if="${#request.userPrincipal != null && #request.isUserInRole('ROLE_ADMIN')}">
+                                    <a class="nav-link" href="/admin/orders">Заказы</a>
+                                </li>
+                                <li class="nav-item" th:if="${#request.userPrincipal != null && #request.isUserInRole('ROLE_ADMIN')}">
+                                    <a class="nav-link" href="/admin">Администрирование</a>
+                                </li>
+                                <li class="nav-item" th:if="${#request.userPrincipal != null}">
+                                    <a class="nav-link" href="/logout">Выйти</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
+
+</html>

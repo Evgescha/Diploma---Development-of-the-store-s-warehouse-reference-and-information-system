@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ 
+<head>
+    <title>Добавить/Редактировать</title>
+    <div th:replace="~{commons :: head}"></div>
+</head>
+ 
+<body>
+
+	<div th:replace="~{commons :: nav}"></div>
+
+<section class="editCategory">
+    <div class="container">
+        <div class="row">
+        <div class="col-12 col-md-12 col-lg-8 mx-auto">
+			 <h2 class="text-center">Товар</h2>
+             <form th:action="@{/product/create}" th:object="${entity}" method="post">
+                <table>
+                    <tbody>                        
+                        <tr>
+                            <th><label class="mx-2">Название</label></th>
+                            <td><input type="text" th:field="*{name}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Описание</label></th>
+                            <td><textarea rows="5" cols="30" th:field="*{description}" class="form-control" required></textarea></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Цена</label></th>
+                            <td><input type="number" th:field="*{price}" class="form-control" required step="0.1"/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Ссылка на изображение</label></th>
+                            <td><input type="text" th:field="*{imageUrl}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Размеры</label></th>
+                            <td><input type="text" th:field="*{sizes}" class="form-control" required/></td>
+                        </tr>
+                        <tr>
+                            <th><label class="mx-2">Вес</label></th>
+                            <td><input type="number" th:field="*{weight}" class="form-control" required step="0.1" min="0.1"/></td>
+                        </tr>
+                         <tr>
+                            <th><label class="mx-2">Количество товаров</label></th>
+                            <td><input type="number" th:field="*{count}" class="form-control" required step="1" min="1"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="my-5 justify-content-between d-flex">
+                	<input type="hidden" id="id" th:field="*{id}">
+                	<input type="button" class="btn btn-primary" value = " Назад " onclick="history.back()"/> 
+                	<input type="submit" class="btn btn-primary" value=" Отправить ">
+            	</p>
+            </form>
+        </div>
+        </div>
+    </div>    
+</section>    
+    
+</body>
+ 
+</html>
