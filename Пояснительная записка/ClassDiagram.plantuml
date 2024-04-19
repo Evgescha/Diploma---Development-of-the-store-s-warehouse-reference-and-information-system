@@ -1,0 +1,66 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AbstractEntity
+class AdminController
+class BeanConfig
+class CrudImpl<Entity>
+interface CrudService<Entity> << interface >>
+class IndexController
+class InsuranceCompany
+class InsuranceCompanyController
+interface InsuranceCompanyRepository << interface >>
+class InsuranceCompanyService
+class Order
+class OrderController
+class OrderItem
+interface OrderItemRepository << interface >>
+class OrderItemService
+interface OrderRepository << interface >>
+class OrderService
+class OrderStatus
+class OrderStatusController
+interface OrderStatusRepository << interface >>
+class OrderStatusService
+class Product
+class ProductController
+interface ProductRepository << interface >>
+class ProductService
+class RegistratoinController
+class Role
+interface RoleRepository << interface >>
+class RoleServiceImpl
+class SecSecurityConfig
+class SwaggerConfig
+class Transporter
+class TransporterController
+interface TransporterRepository << interface >>
+class TransporterService
+class User
+class UserController
+class UserDetailsServiceImpl
+interface UserRepository << interface >>
+class UserServiceImpl
+class WarehouseAccountingApplication
+
+CrudImpl                        -[#008200,dashed]-^  CrudService                    
+InsuranceCompany                -[#000082,plain]-^  AbstractEntity                 
+InsuranceCompanyService         -[#000082,plain]-^  CrudImpl                       
+Order                           -[#000082,plain]-^  AbstractEntity                 
+OrderItem                       -[#000082,plain]-^  AbstractEntity                 
+OrderItemService                -[#000082,plain]-^  CrudImpl                       
+OrderService                    -[#000082,plain]-^  CrudImpl                       
+OrderStatus                     -[#000082,plain]-^  AbstractEntity                 
+OrderStatusService              -[#000082,plain]-^  CrudImpl                       
+Product                         -[#000082,plain]-^  AbstractEntity                 
+ProductService                  -[#000082,plain]-^  CrudImpl                       
+Role                            -[#000082,plain]-^  AbstractEntity                 
+RoleServiceImpl                 -[#000082,plain]-^  CrudImpl                       
+Transporter                     -[#000082,plain]-^  AbstractEntity                 
+TransporterService              -[#000082,plain]-^  CrudImpl                       
+User                            -[#000082,plain]-^  AbstractEntity                 
+UserServiceImpl                 -[#000082,plain]-^  CrudImpl                       
+@enduml

@@ -1,0 +1,77 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class INSURANCE_COMPANY {
+   ADRES: character varying(255)
+   NAME: character varying(255)
+   ID: bigint
+}
+class MY_ORDERS {
+   DATE_DELIVERY: date
+   DATE_ORDER: date
+   CREATOR_ID: bigint
+   ORDER_STATUS_ID: bigint
+   TRANSPORTER_ID: bigint
+   ID: bigint
+}
+class MY_ORDERS_ORDER_ELEMENTS {
+   ORDER_ID: bigint
+   ORDER_ELEMENTS_ID: bigint
+}
+class MY_USERS {
+   DATE_BORN: date
+   EMAIL: character varying(255)
+   FIO: character varying(255)
+   PASSWORD: character varying(255)
+   PHONE: character varying(255)
+   USERNAME: character varying(255)
+   ROLE_ID: bigint
+   ID: bigint
+}
+class ORDER_ITEM {
+   COUNT: integer
+   ORDER_ID: bigint
+   PRODUCT_ID: bigint
+   ID: bigint
+}
+class ORDER_STATUS {
+   NAME: character varying(255)
+   ID: bigint
+}
+class PRODUCT {
+   COUNT: double precision
+   DESCRIPTION: character varying(3000)
+   IMAGE_URL: character varying(1000)
+   NAME: character varying(255)
+   PRICE: double precision
+   SIZES: character varying(255)
+   WEIGHT: double precision
+   ORDER_ID: bigint
+   ID: bigint
+}
+class ROLE {
+   NAME: character varying(255)
+   ID: bigint
+}
+class TRANSPORTER {
+   ADRES: character varying(255)
+   NAME: character varying(255)
+   TRANSPORTER_ID: bigint
+   ID: bigint
+}
+
+MY_ORDERS                 -[#595959,plain]-^  MY_USERS                 : "CREATOR_ID:ID"
+MY_ORDERS                 -[#595959,plain]-^  ORDER_STATUS             : "ORDER_STATUS_ID:ID"
+MY_ORDERS                 -[#595959,plain]-^  TRANSPORTER              : "TRANSPORTER_ID:ID"
+MY_ORDERS_ORDER_ELEMENTS  -[#595959,plain]-^  MY_ORDERS                : "ORDER_ID:ID"
+MY_ORDERS_ORDER_ELEMENTS  -[#595959,plain]-^  ORDER_ITEM               : "ORDER_ELEMENTS_ID:ID"
+MY_USERS                  -[#595959,plain]-^  ROLE                     : "ROLE_ID:ID"
+ORDER_ITEM                -[#595959,plain]-^  MY_ORDERS                : "ORDER_ID:ID"
+ORDER_ITEM                -[#595959,plain]-^  PRODUCT                  : "PRODUCT_ID:ID"
+PRODUCT                   -[#595959,plain]-^  MY_ORDERS                : "ORDER_ID:ID"
+TRANSPORTER               -[#595959,plain]-^  INSURANCE_COMPANY        : "TRANSPORTER_ID:ID"
+TRANSPORTER               -[#595959,plain]-^  TRANSPORTER              : "TRANSPORTER_ID:ID"
+@enduml
